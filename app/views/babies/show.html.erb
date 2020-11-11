@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h2>
+  <strong>Nombre:</strong>
+  <%= @baby.name %>
+</h2>
+  <%count = 0%>
+  <% tiempo_total = 0 %>
+  <% cantidad_total = 0%>
+  <% x = @baby.breastfeedings.count%>
+  <% @baby.breastfeedings.each do |breastfeeding| %>
+    <% x -= 1%>
+    <% tiempo_total += breastfeeding.tiempo %> 
+    <% cantidad_total += breastfeeding.cantidad %> 
+    <% breastfeeding.created_at == Time.now.strftime("%Y-%d-%m")%>
+          <% count += 1%>
+    <% if x == 0 %>
+     <h4>Última vez que tomo leche: <%= breastfeeding.created_at%> </h4> 
+    <%end%>
+  <% end %>
+<h4>Veces que ha tomado hoy: <%= count %> veces </h4> 
+
+<h4>Tiempo total hoy: <%= tiempo_total %> minutos </h4> 
+<h4>Cantidad total: <%= cantidad_total%> cc. </h4>  <br>
+  
+    
+    
+   
+<br>
+<%= link_to 'Añadir más', breastfeedings_path%> <br> 
+
+<%= link_to 'Regresar a babies', root_path %>
